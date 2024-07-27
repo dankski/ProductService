@@ -42,6 +42,11 @@ public class ProductAggregate {
     AggregateLifecycle.apply(productCreatedEvent);
   }
 
+  /**
+   * This method updates the aggreate with the latest values.
+   * 
+   * @param productCreatedEvent
+   */
   @EventSourcingHandler
   public void on(ProductCreatedEvent productCreatedEvent) {
     this.productId = productCreatedEvent.getProductId();
