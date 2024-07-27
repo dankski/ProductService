@@ -22,7 +22,7 @@ public class ProductsController {
   private final Environment env;
   private final CommandGateway commandGateway;
 
-  @Autowired
+  //@Autowired
 	public ProductsController(Environment env, CommandGateway commandGateway) {
     this.env = env;
     this.commandGateway = commandGateway;
