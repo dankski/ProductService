@@ -1,4 +1,4 @@
-package com.appsdeveloperblog.estore.ProductService.rest;
+package com.appsdeveloperblog.estore.ProductService.command.rest;
 
 import java.util.UUID;
 
@@ -16,13 +16,13 @@ import com.appsdeveloperblog.estore.ProductService.command.CreateProductCommand;
 
 @RestController
 @RequestMapping("/products") // http://localhost:8080/products
-public class ProductsController {
+public class ProductsCommandController {
 
   private final Environment env;
   private final CommandGateway commandGateway;
 
   //@Autowired
-	public ProductsController(Environment env, CommandGateway commandGateway) {
+	public ProductsCommandController(Environment env, CommandGateway commandGateway) {
     this.env = env;
     this.commandGateway = commandGateway;
   }
@@ -47,18 +47,18 @@ public class ProductsController {
 		return returnValue;
 	}
 	
-	@GetMapping
-	public String getProducts() {
-		return "HTTP GET Handled " + env.getProperty("local.server.port");
-	}
+	// @GetMapping
+	// public String getProducts() {
+	// 	return "HTTP GET Handled " + env.getProperty("local.server.port");
+	// }
 	
-	@PutMapping
-	public String updateProduct() {
-		return "HTTP PUT Hdndled";
-	}
+	// @PutMapping
+	// public String updateProduct() {
+	// 	return "HTTP PUT Hdndled";
+	// }
 	
-	@DeleteMapping
-	public String deleteProduct() {
-		return "HTTP DELETE Handled";
-	}
+	// @DeleteMapping
+	// public String deleteProduct() {
+	// 	return "HTTP DELETE Handled";
+	// }
 }
