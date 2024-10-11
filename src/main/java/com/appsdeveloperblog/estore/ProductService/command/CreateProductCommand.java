@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
-import com.thoughtworks.xstream.annotations.XStreamInclude;
-
 import lombok.Builder;
 import lombok.Data;
 
