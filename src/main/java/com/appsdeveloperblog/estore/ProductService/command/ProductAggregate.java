@@ -11,6 +11,7 @@ import org.springframework.beans.BeanUtils;
 
 import com.appsdeveloperblog.estore.ProductService.core.events.ProductCreatedEvent;
 import com.appsdeveloperblog.estore.core.commands.ReserveProductCommand;
+import com.appsdeveloperblog.estore.core.events.ProductReservedEvent;
 
 @Aggregate
 public class ProductAggregate {
@@ -49,6 +50,15 @@ public class ProductAggregate {
     if (quantity < reserveProductCommand.getQuantity()) {
       throw new IllegalArgumentException("Insufficent number of items in stock");
     }
+
+    ProductReservedEvent productReservedEvent = ProductReservedEvent.builder()
+    .orderId(reserveProductCommand.getOrderId())
+    .productId(reserveProductCommand.getProductId())
+    .quantity(reserveProductCommand.getQuantity())
+    .userId(reserveProductCommand.getUserId())
+    .build();
+
+    AggregateLifecycle.apply(productReservedEvent);
   }
 
   /**
@@ -63,4 +73,10 @@ public class ProductAggregate {
     this.title = productCreatedEvent.getTitle();
     this.quantity = productCreatedEvent.getQuantity();
   }
+
+  @EventSourcingHandler
+  public void on(ProductReservedEvent productReservedEvent) {
+    this.quantity -= productReservedEvent.getQuantity();
+  }
+
 }
