@@ -17,8 +17,10 @@ public class AxonConfiguration {
       XStream xStream = new XStream();
       
       // Allow the ReserveProductCommand class
-      xStream.allowTypes(new Class[] { com.appsdeveloperblog.estore.core.commands.ReserveProductCommand.class, com.appsdeveloperblog.estore.ProductService.command.CreateProductCommand.class });
-
+      // xStream.allowTypes(new Class[] { com.appsdeveloperblog.estore.core.commands.ReserveProductCommand.class, com.appsdeveloperblog.estore.ProductService.command.CreateProductCommand.class });
+      xStream.allowTypesByWildcard(new String[] {
+        "com.appsdeveloperblog.estore.**"
+      });
       return xStream;
   }
 
