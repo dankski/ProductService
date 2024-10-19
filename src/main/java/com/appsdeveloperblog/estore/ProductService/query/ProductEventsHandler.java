@@ -55,7 +55,7 @@ public class ProductEventsHandler {
     productEntity.setQuantity(productEntity.getQuantity() - productReservedEvent.getQuantity());
     productsRepository.save(productEntity);
 
-    LOGGER.info("ProductReservedEvent is called for productId: " + productReservedEvent.getProductId());
+    LOGGER.info("ProductReservedEvent is called for productId: " + productReservedEvent.getProductId() + " and orderId: " + productReservedEvent.getOrderId());
   }
 
 
