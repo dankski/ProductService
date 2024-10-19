@@ -1,0 +1,56 @@
+POST http://localhost:8082/products-service/products HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "iPhone 6",
+  "price": 500,
+  "quantity": 2
+}
+
+###
+POST http://localhost:8082/orders-service/orders HTTP/1.1
+Content-Type: application/json
+
+{
+  "productId": "87f88558-cd16-429b-a0e0-98f972be1018",
+  "quantity": 1,
+  "addressId": "afbb5881-a872-4d13-993c-faeb8350eea5"
+}
+
+###
+GET http://localhost:8082/products-service/products HTTP/1.1
+Content-Type: application/json
+
+
+###
+POST http://localhost:8082/orders-service/orders HTTP/1.1
+Content-Type: application/json
+
+{
+  "productId": "c8875003-6f1f-4aca-bcb1-caa51f2c9caa",
+  "quantity": 1,
+  "addressId": "afbb5881-a872-4d13-993c-faeb8350eea5"
+}
+
+
+### Demo
+
+### 1. Create Product
+POST http://localhost:8082/products-service/products HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "iPhone 7",
+  "price": 500,
+  "quantity": 2
+}
+
+### 2. 
+POST http://127.0.0.1:8082/orders-service/orders HTTP/1.1
+Content-Type: application/json
+
+{
+  "productId": "b7d97637-24d3-4455-a87c-ebc4aa7c7eb2",
+  "quantity": 1,
+  "addressId": "afbb5881-a872-4d13-993c-faeb8350eea5"
+}
