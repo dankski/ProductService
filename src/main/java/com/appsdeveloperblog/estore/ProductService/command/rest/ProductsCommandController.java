@@ -20,8 +20,7 @@ public class ProductsCommandController {
   private final Environment env;
   private final CommandGateway commandGateway;
 
-  //@Autowired
-	public ProductsCommandController(Environment env, CommandGateway commandGateway) {
+  public ProductsCommandController(Environment env, CommandGateway commandGateway) {
     this.env = env;
     this.commandGateway = commandGateway;
   }
@@ -35,7 +34,7 @@ public class ProductsCommandController {
     .title(createProductRestModel.getTitle())
     .productId(UUID.randomUUID().toString()).build();
 
-    String returnValue = commandGateway.sendAndWait(createProductCommand);;
+    String returnValue = commandGateway.sendAndWait(createProductCommand);
 
 		return returnValue;
 	}
