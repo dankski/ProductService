@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import com.appsdeveloperblog.estore.ProductService.core.data.ProductEntity;
 import com.appsdeveloperblog.estore.ProductService.core.data.ProductsRepository;
 import com.appsdeveloperblog.estore.ProductService.core.events.ProductCreatedEvent;
+import com.appsdeveloperblog.estore.core.events.ProductReservationCancellledEvent;
 import com.appsdeveloperblog.estore.core.events.ProductReservedEvent;
 
 @Component
@@ -59,4 +60,13 @@ public class ProductEventsHandler {
   }
 
 
+  @EventHandler
+  public void on(ProductReservationCancellledEvent productReservationCancellledEvent) {
+     ProductEntity currentStoredProduct = productsRepository.findByProductId(productReservationCancellledEvent.getProductId());
+
+     int newQuantity = currentStoredProduct.getQuantity() + productReservationCancellledEvent.getQuantity();
+
+      currentStoredProduct.setQuantity(newQuantity);
+      productsRepository.save(currentStoredProduct);
+  }
 }

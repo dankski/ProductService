@@ -10,7 +10,9 @@ import org.axonframework.spring.stereotype.Aggregate;
 import org.springframework.beans.BeanUtils;
 
 import com.appsdeveloperblog.estore.ProductService.core.events.ProductCreatedEvent;
+import com.appsdeveloperblog.estore.core.commands.CancelProductReservationCommand;
 import com.appsdeveloperblog.estore.core.commands.ReserveProductCommand;
+import com.appsdeveloperblog.estore.core.events.ProductReservationCancellledEvent;
 import com.appsdeveloperblog.estore.core.events.ProductReservedEvent;
 
 @Aggregate
@@ -59,6 +61,25 @@ public class ProductAggregate {
     .build();
 
     AggregateLifecycle.apply(productReservedEvent);
+  }
+
+  @CommandHandler
+  public void handle(CancelProductReservationCommand cancelProductReservationCommand) {
+    ProductReservationCancellledEvent productReservationCancellledEvent = ProductReservationCancellledEvent.builder()
+                                                                          .orderId(cancelProductReservationCommand.getOrderId())
+                                                                          .productId(cancelProductReservationCommand.getProductId())
+                                                                          .quantity(cancelProductReservationCommand.getQuantity())
+                                                                          .userId(cancelProductReservationCommand.getUserId())
+                                                                          .reason(cancelProductReservationCommand.getReason())
+                                                                          .build();
+
+    AggregateLifecycle.apply(productReservationCancellledEvent);                                                       
+  }
+
+  @EventSourcingHandler
+  public void on(ProductReservationCancellledEvent productReservationCancellledEvent) {
+    this.quantity += productReservationCancellledEvent.getQuantity();
+    
   }
 
   /**
